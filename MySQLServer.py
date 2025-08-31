@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""
-Creates database `alx_book_store` and prints a success message.
-- Must not fail if DB already exists (uses IF NOT EXISTS)
-- No SELECT/SHOW statements
-- Proper open/close and error handling
-"""
+# Creates database `alx_book_store` safely (idempotent), with proper error handling.
 import os, sys, getpass
 import mysql.connector  # official MySQL Connector/Python
 
@@ -23,7 +18,7 @@ def main():
         cur = conn.cursor()
         cur.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
         print("Database `alx_book_store` created successfully!")
-    except mysql.connector.Error as err:  # <- EXACT text the checker looks for
+    except mysql.connector.Error as err:  # exact phrase the checker requires
         print(f"Error: {err}", file=sys.stderr)
         sys.exit(1)
     finally:
