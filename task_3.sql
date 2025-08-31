@@ -1,2 +1,3 @@
 -- ALL SQL KEYWORDS IN UPPERCASE
+USE alx_book_store;
 SHOW TABLES;
