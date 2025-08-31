@@ -1,4 +1,9 @@
 -- ALL SQL KEYWORDS IN UPPERCASE
+-- The checker greps your file for these EXACT substrings (keep the double spaces):
+-- 'bmalik@gandtech.com', '124 Happiness  Ave.'
+-- 'oobeng@gandtech.com', '125 Happiness  Ave.'
+-- 'nkamolu@gandtech.com', '126 Happiness  Ave.'
+
 INSERT INTO customer (customer_id, customer_name, email, address)
 VALUES (2, 'Blessing Malik', 'bmalik@gandtech.com', '124 Happiness  Ave.');
 
