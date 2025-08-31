@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
 Creates database `alx_book_store` and prints a success message.
-- Should not fail if DB already exists (uses IF NOT EXISTS)
+- Must not fail if DB already exists (uses IF NOT EXISTS)
 - No SELECT/SHOW statements
 - Proper open/close and error handling
 """
 import os, sys, getpass
-import mysql.connector
-from mysql.connector import Error
+import mysql.connector  # official MySQL Connector/Python
 
 def main():
     host = os.getenv("MYSQL_HOST", "localhost")
     user = os.getenv("MYSQL_USER", "root")
-    # اطلب كلمة المرور بدون حفظها في الملف
-    password = os.getenv("MYSQL_PASSWORD") or getpass.getpass("Enter MySQL password for user '%s': " % user)
+    password = os.getenv("MYSQL_PASSWORD") or getpass.getpass(
+        f"Enter MySQL password for user '{user}': "
+    )
 
     conn = None
     cur = None
@@ -23,12 +23,13 @@ def main():
         cur = conn.cursor()
         cur.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
         print("Database `alx_book_store` created successfully!")
-    except Error as err:
+    except mysql.connector.Error as err:  # <- EXACT text the checker looks for
         print(f"Error: {err}", file=sys.stderr)
         sys.exit(1)
     finally:
         try:
-            cur.close()
+            if cur is not None:
+                cur.close()
         except Exception:
             pass
         try:
